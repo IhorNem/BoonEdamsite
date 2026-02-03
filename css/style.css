@@ -1,9 +1,10 @@
-/* Основні змінні та скидання */
+/* Основні змінні та скидання (тренди 2024–2025) */
 :root {
     --primary-color: #1a2e1a;
     --secondary-color: #2d4a2d;
     --accent-color: #2d5016;
     --accent-gold: #d4af37;
+    --accent-gold-light: #e5c65c;
     --accent-red: #c41e3a;
     --dark-bg: #0d1a0d;
     --light-bg: #f8f9fa;
@@ -13,6 +14,15 @@
     --hover-color: #3d6020;
     --card-bg: #1e2e1e;
     --shadow: rgba(0, 0, 0, 0.3);
+    /* Сучасні радіуси та тіні */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.12);
+    --transition: 0.3s ease;
 }
 
 * {
@@ -47,15 +57,17 @@ h6,
     padding: 0 20px;
 }
 
-/* Шапка сайту */
+/* Шапка сайту (glassmorphism) */
 header {
-    background: var(--primary-color);
+    background: rgba(26, 46, 26, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--text-light);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px var(--shadow);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .header-content {
@@ -85,15 +97,35 @@ header {
     color: var(--text-light);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: color var(--transition), background var(--transition), box-shadow var(--transition);
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
+    position: relative;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
-    color: var(--accent-color);
-    background: rgba(52, 152, 219, 0.1);
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.12);
+}
+
+.main-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: var(--accent-gold);
+    border-radius: var(--radius-full);
+}
+
+.main-nav a:focus-visible,
+.cta-button:focus-visible,
+.product-link:focus-visible,
+.submit-btn:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
 }
 
 .mobile-menu-btn {
@@ -110,15 +142,17 @@ header {
     border-radius: 2px;
 }
 
-/* Головний банер */
+/* Головний банер (сильніший контраст тексту) */
 .hero {
     background: linear-gradient(
-            rgba(13, 26, 13, 0.2),
-            rgba(26, 46, 26, 0.2)
+            180deg,
+            rgba(13, 26, 13, 0.5) 0%,
+            rgba(26, 46, 26, 0.4) 50%,
+            rgba(13, 26, 13, 0.7) 100%
         ),
         url('../images/hero.png') center bottom/cover no-repeat;
     color: var(--text-light);
-    padding: 10rem 0;
+    padding: clamp(5rem, 12vw, 10rem) 0;
     text-align: center;
 }
 
@@ -172,21 +206,21 @@ header {
 
 .cta-button {
     display: inline-block;
-    background: var(--accent-gold);
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
     color: var(--text-dark);
     padding: 1rem 2.5rem;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     font-weight: 600;
     font-size: 1.1rem;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+    box-shadow: var(--shadow-soft), 0 4px 20px rgba(212, 175, 55, 0.25);
 }
 
 .cta-button:hover {
-    background: #c49b2e;
+    filter: brightness(1.05);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    box-shadow: var(--shadow-card), 0 8px 28px rgba(212, 175, 55, 0.35);
 }
 
 /* Секції */
@@ -221,14 +255,15 @@ header {
 .benefit-card {
     background: white;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .benefit-icon {
@@ -283,17 +318,18 @@ header {
 
 .product-card {
     background: white;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition);
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .product-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .product-image {
@@ -464,8 +500,9 @@ header {
 .contact-form form {
     background: white;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .form-group {
@@ -475,37 +512,38 @@ header {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     border: 2px solid #ecf0f1;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 1rem;
     font-family: inherit;
-    transition: border-color 0.3s;
+    transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-gold);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
 }
 
 .submit-btn {
     width: 100%;
     padding: 1rem;
-    background: var(--accent-red);
+    background: linear-gradient(135deg, var(--accent-red) 0%, #a81729 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
 }
 
 .submit-btn:hover {
-    background: #a81729;
+    filter: brightness(1.08);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+    box-shadow: 0 8px 24px rgba(196, 30, 58, 0.3);
 }
 
 /* Підвал */
@@ -618,4 +656,25 @@ footer {
 /* Плавна прокрутка */
 html {
     scroll-behavior: smooth;
+}
+
+/* Повага до reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .benefit-card:hover,
+    .product-card:hover {
+        transform: none;
+    }
+
+    .cta-button:hover,
+    .submit-btn:hover {
+        transform: none;
+    }
 }
