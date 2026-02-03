@@ -560,7 +560,12 @@ footer {
         display: none;
     }
 
-    .main-nav ul {
+    /* Styles for the menu when expanded via JS (class .menu-open) */
+    .main-nav.menu-open {
+        display: block;
+    }
+
+    .main-nav.menu-open ul {
         flex-direction: column;
         gap: 1rem;
         padding: 1rem 0;
