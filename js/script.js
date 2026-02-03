@@ -48,7 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('.main-nav a').forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            const href = link.getAttribute('href') || '';
+            if (href === `#${current}`) {
+                link.classList.add('active');
+            } else if (!current && (href === 'index.html' || href === '/' || href.endsWith('/index.html'))) {
                 link.classList.add('active');
             }
         });
