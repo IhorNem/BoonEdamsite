@@ -46,12 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        const isDocumentsPage = window.location.pathname.endsWith('documents.html');
         document.querySelectorAll('.main-nav a').forEach(link => {
             link.classList.remove('active');
             const href = link.getAttribute('href') || '';
             if (href === `#${current}`) {
                 link.classList.add('active');
             } else if (!current && (href === 'index.html' || href === '/' || href.endsWith('/index.html'))) {
+                link.classList.add('active');
+            } else if (isDocumentsPage && (href === 'documents.html' || href.endsWith('/documents.html'))) {
                 link.classList.add('active');
             }
         });
