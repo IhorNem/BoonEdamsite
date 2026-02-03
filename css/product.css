@@ -156,6 +156,50 @@
     background: white;
 }
 
+.documents {
+    padding: 4rem 0 5rem;
+    background: var(--light-bg);
+}
+
+.documents-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.documents-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    background: white;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.documents-list a::after {
+    content: "↓";
+    font-size: 1.2rem;
+    color: var(--accent-gold);
+    transition: transform 0.3s;
+}
+
+.documents-list a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    color: var(--accent-color);
+}
+
+.documents-list a:hover::after {
+    transform: translateY(2px);
+}
+
 .applications-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
