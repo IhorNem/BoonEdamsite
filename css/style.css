@@ -287,6 +287,8 @@ header {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -349,6 +351,7 @@ header {
     font-weight: 600;
     transition: all 0.3s;
     background: rgba(45, 80, 22, 0.1);
+    margin-top: auto;
 }
 
 .product-link:hover {
